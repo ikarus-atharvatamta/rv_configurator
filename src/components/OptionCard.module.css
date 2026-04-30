@@ -1,0 +1,39 @@
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  margin-bottom: 8px;
+  background: var(--white);
+  user-select: none;
+}
+
+.card:last-child {
+  margin-bottom: 0;
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+  background: #fafaf8;
+}
+
+.card.selected {
+  border: 2px solid var(--selected-border);
+  background: #f7f5f1;
+}
+
+.name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.price {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
