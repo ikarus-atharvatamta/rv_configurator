@@ -27,16 +27,17 @@ const EXTERIOR_PREVIEW_IMG = 'https://backyardescapism.com/cdn/shop/files/Exteri
 
 const COLOR_SWATCHES = [
   { name: 'Charcoal', hex: '#8d8b83', priceLabel: 'No Extra Charges' },
-  { name: 'Indigo Blue', hex: '#1f3f73', priceLabel: 'No Extra Charges' },
-  { name: 'Silver Mist', hex: '#a4a6b5', priceLabel: 'No Extra Charges' },
-  { name: 'Slate Blue', hex: '#747c8f', priceLabel: 'No Extra Charges' },
+  { name: 'Indigo Blue', hex: '#1f3f73', priceLabel: 'No Extra Charges', previewImg: '/design images/model_images/Gemini_Generated_Image_ewznwewznwewznwe.png' },
+  { name: 'Silver Mist', hex: '#8d8e97', priceLabel: 'No Extra Charges', previewImg: '/design images/model_images/Gemini_Generated_Image_ez6yblez6yblez6y.png' },
+  { name: 'Slate Blue', hex: '#465579', priceLabel: 'No Extra Charges' },
   { name: 'Cobalt', hex: '#1f63bf', priceLabel: 'No Extra Charges' },
   { name: 'Green', hex: '#24990a', priceLabel: 'No Extra Charges' },
   { name: 'Red', hex: '#d70039', priceLabel: 'No Extra Charges' },
   { name: 'Orange', hex: '#ef4a02', priceLabel: 'No Extra Charges' },
   { name: 'Yellow', hex: '#f0ae00', priceLabel: 'No Extra Charges' },
-  { name: 'Grey', hex: '#6f7688', priceLabel: 'No Extra Charges' },
-  { name: 'Steel', hex: '#a6a6a6', priceLabel: 'No Extra Charges' },
+  {name: "Forest Green", hex: "#004024", priceLabel: 'No Extra Charges'},
+  { name: 'Grey', hex: '#616878', priceLabel: 'No Extra Charges' },
+  { name: 'Steel', hex: '#a7a1a1', priceLabel: 'No Extra Charges' },
 ];
 
 const REAR_DOOR_OPTIONS = [
@@ -75,15 +76,23 @@ function OptionRow({ label, info, price, disabled, selected, onToggle, multiChoi
   return (
     <button
       type="button"
-      className={`w-full rounded-md border border-[#d2d2d2] bg-white min-h-[54px] px-5 py-3 flex items-center justify-between text-left transition-colors ${
-        disabled ? 'opacity-40 cursor-default' : 'cursor-pointer hover:bg-[#fafafa]'
+      className={`w-full rounded-md border min-h-[54px] px-5 py-3 flex items-center justify-between text-left transition-colors ${
+        disabled
+          ? 'opacity-40 cursor-default border-[#d2d2d2] bg-white'
+          : selected
+            ? 'cursor-pointer border-[#28453a] bg-[#f8fbf7]'
+            : 'cursor-pointer border-[#d2d2d2] bg-white hover:bg-[#fafafa]'
       }`}
       onClick={disabled ? undefined : onToggle}
     >
       <span className={`text-[15px] leading-none ${disabled ? 'text-[#9d9d9d]' : 'text-[#0c121c]'}`}>{label}</span>
       <div className="flex items-center gap-4 flex-shrink-0">
         <span className={`text-[15px] leading-none ${disabled ? 'text-[#ababab]' : 'text-[#0c121c]'}`}>{infoText}</span>
-        <OptionToggle selected={selected} disabled={disabled} />
+        {!disabled && (
+          <span className={selected ? 'text-[#28453a]' : 'text-[#525760]'}>
+            {selected ? <CheckIcon /> : <PlusMinusIcon open={false} />}
+          </span>
+        )}
       </div>
     </button>
   );
@@ -155,23 +164,21 @@ function RearDoorRow({ selectedOptions, onToggleOption }) {
 
   return (
     <div className={`w-full rounded-md border px-4 py-4 flex flex-col gap-4 ${
-      selectedRearDoors.length > 0 ? 'border-[#28453a] bg-[#f8fbf7]' : 'border-[#d2d2d2] bg-white'
+      open || selectedRearDoors.length > 0 ? 'border-[#28453a] ' : 'border-[#d2d2d2] bg-white'
     }`}>
-      <div className="flex items-center justify-between gap-4">
+      <button
+        type="button"
+        onClick={() => setOpen(prev => !prev)}
+        className="w-full flex items-center justify-between gap-4 cursor-pointer"
+      >
         <span className="text-[13px] text-[#0c121c] leading-none">Rear Door</span>
-        <button
-          type="button"
-          onClick={() => setOpen(prev => !prev)}
-          className="flex items-center gap-3 text-[#0c121c] cursor-pointer"
-        >
-          <span className="text-[13px] leading-none">
-            {summaryText}
-          </span>
+        <div className="flex items-center gap-3 text-[#0c121c]">
+          <span className="text-[13px] leading-none">{summaryText}</span>
           <span className={selectedRearDoors.length > 0 ? 'text-[#28453a]' : 'text-[#525760]'}>
             {selectedRearDoors.length > 0 ? <CheckIcon /> : <PlusMinusIcon open={open} />}
           </span>
-        </button>
-      </div>
+        </div>
+      </button>
 
       {open && (
         <>
@@ -268,43 +275,50 @@ function ColorRow({ selectedColor, onSelect }) {
 
       <div className="overflow-hidden rounded-[6px]">
         <img
-          src={EXTERIOR_PREVIEW_IMG}
+          src={current?.previewImg ?? EXTERIOR_PREVIEW_IMG}
           alt="Exterior color preview"
-          className="w-full h-[172px] object-cover"
+          className="w-full h-[172px] object-cover transition-opacity duration-300"
         />
       </div>
 
-      <div className="grid grid-cols-6 gap-2">
-        {COLOR_SWATCHES.map(sw => {
-          const isHovered = hoveredSwatch === sw.name;
-          const isSelected = current?.name === sw.name;
-
+      <div className="flex flex-col gap-2">
+        {[COLOR_SWATCHES.slice(0, 6), COLOR_SWATCHES.slice(6)].map((row, rowIndex) => {
+          const rowHasHover = row.some(s => s.name === hoveredSwatch);
           return (
-            <div key={sw.name} className={`relative h-[36px] ${isHovered ? 'col-span-2' : 'col-span-1'}`}>
-              <button
-                type="button"
-                onClick={() => onSelect(sw)}
-                onMouseEnter={() => setHoveredSwatch(sw.name)}
-                onMouseLeave={() => setHoveredSwatch(null)}
-                title={sw.name}
-                className={`relative h-full w-full rounded-[6px] overflow-hidden transition-all duration-300 ease-out cursor-pointer ${
-                  isSelected ? 'ring-1 ring-[#28453a] ring-offset-1' : ''
-                }`}
-              >
-                <span
-                  className={`absolute inset-0 rounded-[6px] transition-all duration-300 ${
-                    isHovered ? 'shadow-[0_6px_18px_rgba(0,0,0,0.18)]' : 'shadow-none'
-                  }`}
-                  style={{ background: sw.hex }}
-                />
-                <span
-                  className={`relative z-10 flex h-full items-center justify-center px-2 text-[11px] text-white whitespace-nowrap transition-all duration-300 ${
-                    isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
-                  }`}
-                >
-                  {sw.name}
-                </span>
-              </button>
+            <div key={rowIndex} className="flex gap-2">
+              {row.map(sw => {
+                const isHovered = hoveredSwatch === sw.name;
+                const isSelected = current?.name === sw.name;
+                const flexGrow = isHovered ? 2.5 : rowHasHover ? 0.87 : 1;
+
+                return (
+                  <div
+                    key={sw.name}
+                    className="relative h-[36px] min-w-0"
+                    style={{ flexGrow, flexShrink: 1, flexBasis: 0, transition: 'flex-grow 0.3s ease-out' }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => onSelect(sw)}
+                      onMouseEnter={() => setHoveredSwatch(sw.name)}
+                      onMouseLeave={() => setHoveredSwatch(null)}
+                      title={sw.name}
+                      style={{ background: sw.hex }}
+                      className={`w-full h-full rounded-[6px] cursor-pointer overflow-hidden transition-shadow duration-300 ease-out ${
+                        isHovered ? 'shadow-[0_6px_20px_rgba(0,0,0,0.24)]' : ''
+                      } ${isSelected ? 'ring-2 ring-[#28453a] ring-offset-1' : ''}`}
+                    >
+                      <span
+                        className={`flex h-full items-center justify-center px-3 text-[12px] font-medium text-white whitespace-nowrap transition-opacity duration-200 ${
+                          isHovered ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      >
+                        {sw.name}
+                      </span>
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           );
         })}

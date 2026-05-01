@@ -27,7 +27,7 @@ export default function CategoryBar({ activeStep, onSelect, stepProgress }) {
   }
 
   return (
-    <div className="w-full bg-white flex-shrink-0 flex items-center h-[64px] border-b border-[#e8e6e2]">
+    <div className="w-full bg-white flex-shrink-0 flex items-center h-[64px]">
 
       {/* Left chevron — mobile only */}
       <button

@@ -115,25 +115,25 @@ export default function BottomBar({ modelName, basePrice, addOns, onDownload, sa
           {modelName}
         </span>
 
-        <div className="hidden lg:flex items-center ml-auto gap-10">
+        <div className="hidden lg:flex items-center ml-auto mr-5 gap-10">
           <div className="flex items-center gap-4">
             <div className="flex flex-col">
-              <span className="text-[#666] text-[15px] uppercase tracking-widest mb-1">Base Price</span>
+              <span className="text-[#666] text-[15px] uppercase tracking-widest ">Base Price</span>
               <span className="text-white text-[30px] font-semibold">${basePrice.toLocaleString()}</span>
             </div>
-            <span className="text-[#555] text-[14px]">+</span>
+            <span className="text-[#555] text-[30px]">+</span>
             <div className="flex flex-col">
-              <span className="text-[#666] text-[15px] uppercase tracking-widest mb-1">Add-Ons</span>
+              <span className="text-[#666] text-[15px] uppercase tracking-widest ">Add-Ons</span>
               <span className="text-white text-[30px] font-semibold">${addOns.toLocaleString()}</span>
             </div>
             <span className="text-[#555] text-[30px]">-</span>
             <div className="flex flex-col">
-              <span className="text-[#666] text-[15px] uppercase tracking-widest mb-1">Discount</span>
+              <span className="text-[#666] text-[15px] uppercase tracking-widest ">Discount</span>
               <span className="text-white text-[30px] font-bold">{savingsPct}%</span>
             </div>
             <span className="text-[#555] text-[30px]">=</span>
             <div className="flex flex-col">
-              <span className="text-[#666] text-[15px] uppercase tracking-widest mb-1">Effective Price</span>
+              <span className="text-[#666] text-[15px] uppercase tracking-widest ">Effective Price</span>
               <span className="text-white text-[30px] font-bold">${effective.toLocaleString()}</span>
             </div>
           </div>

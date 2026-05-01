@@ -1,6 +1,42 @@
 import { useState, useRef } from 'react';
 
 const TRAILER_IMG = '/design images/image-removebg-preview.png';
+const CubeScanIcon = ({ size = 64, stroke = "black", strokeWidth = 2 }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Cube */}
+      <path
+        d="M32 10 L50 20 L50 44 L32 54 L14 44 L14 20 Z"
+        stroke={stroke}
+        strokeWidth={strokeWidth}
+        strokeLinejoin="round"
+      />
+      <path
+        d="M32 10 L32 54"
+        stroke={stroke}
+        strokeWidth={strokeWidth}
+      />
+      <path
+        d="M14 20 L32 30 L50 20"
+        stroke={stroke}
+        strokeWidth={strokeWidth}
+        strokeLinejoin="round"
+      />
+
+      {/* Corner brackets */}
+      <path d="M6 18 V6 H18" stroke={stroke} strokeWidth={strokeWidth} strokeLinecap="round"/>
+      <path d="M46 6 H58 V18" stroke={stroke} strokeWidth={strokeWidth} strokeLinecap="round"/>
+      <path d="M58 46 V58 H46" stroke={stroke} strokeWidth={strokeWidth} strokeLinecap="round"/>
+      <path d="M18 58 H6 V46" stroke={stroke} strokeWidth={strokeWidth} strokeLinecap="round"/>
+    </svg>
+  );
+};
 
 export default function LeftPanel({ onSave }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -8,7 +44,7 @@ export default function LeftPanel({ onSave }) {
 
   function toggleFullscreen() {
     if (!document.fullscreenElement) {
-      panelRef.current?.requestFullscreen().catch(() => {});
+      panelRef.current?.requestFullscreen().catch(() => { });
       setIsFullscreen(true);
     } else {
       document.exitFullscreen();
@@ -33,7 +69,7 @@ export default function LeftPanel({ onSave }) {
         <div className="flex items-start justify-end p-2 lg:p-3 gap-2 lg:gap-5 flex-shrink-0">
           <button
             onClick={onSave}
-            className="w-8 h-8 lg:w-12 lg:h-12 rounded-lg bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors cursor-pointer shadow-sm"
+            className="w-8 h-8 lg:w-12 lg:h-12 rounded-md bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors cursor-pointer shadow-sm"
             title="Save Build"
           >
             <svg width="16" height="16" className="lg:w-[22px] lg:h-[22px]" viewBox="0 0 24 24" fill="none" stroke="#444" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -44,7 +80,7 @@ export default function LeftPanel({ onSave }) {
           </button>
           <button
             onClick={toggleFullscreen}
-            className="w-8 h-8 lg:w-12 lg:h-12 rounded-lg bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors cursor-pointer shadow-sm"
+            className="w-8 h-8 lg:w-12 lg:h-12 rounded-md bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors cursor-pointer shadow-sm"
             title="Fullscreen"
           >
             {isFullscreen ? (
@@ -72,20 +108,17 @@ export default function LeftPanel({ onSave }) {
 
         {/* Bottom controls */}
         <div className="flex items-center justify-center gap-4 p-4 flex-shrink-0">
-          <button className="flex items-center gap-2.5 bg-[#d1d5dc]  hover:bg-[#e4e4e4] text-[#1a1a1a] text-[14px] font-medium h-12 px-6 rounded-xl transition-colors cursor-pointer">
+          <button className="flex items-center gap-2.5 bg-[#e5e7eb]  hover:bg-[#d1d5dc] text-[#1a1a1a] text-[14px] font-medium h-12 px-6 rounded-md transition-colors cursor-pointer">
             View In AR
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-              <line x1="12" y1="22.08" x2="12" y2="12"/>
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+              <line x1="12" y1="22.08" x2="12" y2="12" />
             </svg>
           </button>
-          <button className="flex items-center gap-2.5 bg-[#d1d5dc] hover:bg-[#e4e4e4] text-[#1a1a1a] text-[14px] font-medium h-12 px-6 rounded-xl transition-colors cursor-pointer">
+          <button className="flex items-center gap-2.5 bg-[#e5e7eb]  hover:bg-[#d1d5dc] text-[#1a1a1a] text-[14px] font-medium h-12 px-6 rounded-md transition-colors cursor-pointer">
             Dimensions
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M2 12h20M2 12l4-4M2 12l4 4M22 12l-4-4M22 12l-4 4"/>
-            </svg>
-          </button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler-icon lucide-ruler"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /><path d="m14.5 12.5 2-2" /><path d="m11.5 9.5 2-2" /><path d="m8.5 6.5 2-2" /><path d="m17.5 15.5 2-2" /></svg>          </button>
         </div>
       </div>
     </div>

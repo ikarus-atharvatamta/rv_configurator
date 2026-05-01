@@ -72,17 +72,19 @@ export const PREBUILDS = [
 ];
 
 export const SWATCHES = [
-  { name: 'Charcoal', hex: '#7a7672', price: 0 },
+  { name: 'Charcoal', hex: '#262422', price: 0 },
   { name: 'Navy Blue', hex: '#1e3a6e', price: 0 },
   { name: 'White', hex: '#ffffff', price: 0 },
   { name: 'Silver', hex: '#9ea5aa', price: 500 },
-  { name: 'Slate', hex: '#4a4f54', price: 500 },
+  { name: 'Slate', hex: '#3e5f81', price: 500 },
   { name: 'Green', hex: '#2c7a2c', price: 500 },
   { name: 'Red', hex: '#c0281e', price: 500 },
   { name: 'Orange', hex: '#e06a10', price: 500 },
   { name: 'Yellow', hex: '#d4a017', price: 500 },
+  {name: "Forest Green", hex: "#004024", price: 0},
   { name: 'Light Grey', hex: '#b0aca8', price: 0 },
   { name: 'Cream', hex: '#d8d4d0', price: 0 },
+ 
 ];
 
 export const EXTERIOR_OPTIONS = {
