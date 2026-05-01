@@ -391,6 +391,7 @@ export default function RightPanel({
   selectedColor,
   onColorSelect,
   onSubStepChange,
+  onScrollChange,
 }) {
   const [activeSubTab, setActiveSubTab] = useState('color');
   const scrollRef = useRef(null);
@@ -451,7 +452,7 @@ export default function RightPanel({
         </button>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto lg:px-6 py-5 flex flex-col gap-10 scrollbar-hide">
+      <div ref={scrollRef} onScroll={e => onScrollChange?.(e.currentTarget.scrollTop > 10)} className="flex-1 overflow-y-auto lg:px-6 py-5 flex flex-col gap-10 scrollbar-hide">
         {activeStep !== 'interior' && (
           <>
             <div id="section-color">

@@ -24,6 +24,7 @@ export default function ConfiguratorPage() {
   const [basePrice, setBasePrice] = useState(DEFAULT_BASE);
   const [modelName, setModelName] = useState('Model name');
   const [openSummary, setOpenSummary] = useState(false);
+  const [rightScrolled, setRightScrolled] = useState(false);
 
   function handlePrebuildSelect(id) {
     if (id === null) {
@@ -86,7 +87,7 @@ export default function ConfiguratorPage() {
             stepProgress={activeStepProgress}
           />
           <div className="lg:flex-1 lg:min-h-0 lg:overflow-hidden lg:mx-4 flex flex-col">
-            <LeftPanel onSave={handleSaveBuild} />
+            <LeftPanel onSave={handleSaveBuild} compact={rightScrolled} />
           </div>
         </div>
 
@@ -101,6 +102,7 @@ export default function ConfiguratorPage() {
             selectedPrebuild={selectedPrebuild}
             onPrebuildSelect={handlePrebuildSelect}
             onSubStepChange={setActiveSubStep}
+            onScrollChange={setRightScrolled}
             savingsPct={20}
           />
           <OrderSummary
