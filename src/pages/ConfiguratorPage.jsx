@@ -80,27 +80,18 @@ export default function ConfiguratorPage() {
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
         {/* Left: Trailer + CategoryBar */}
         <div className="w-full lg:w-[75vw] lg:flex-shrink-0 min-h-0 flex flex-col lg:mx-4 overflow-hidden">
-          <div className="hidden lg:block">
-            <CategoryBar
-              activeStep={activeStep}
-              onSelect={handleStepChange}
-              stepProgress={activeStepProgress}
-            />
-          </div>
+          <CategoryBar
+            activeStep={activeStep}
+            onSelect={handleStepChange}
+            stepProgress={activeStepProgress}
+          />
           <div className="lg:flex-1 lg:min-h-0 lg:overflow-hidden lg:mx-4 flex flex-col">
             <LeftPanel onSave={handleSaveBuild} />
-          </div>
-          <div className="lg:hidden">
-            <CategoryBar
-              activeStep={activeStep}
-              onSelect={handleStepChange}
-              stepProgress={activeStepProgress}
-            />
           </div>
         </div>
 
         {/* Right: Options panel */}
-        <div className="relative px-3 flex-1 lg:w-[24vw] lg:flex-none lg:flex-shrink-0 flex flex-col overflow-hidden border-t lg:border-t-0 lg:border-l border-[#e8e6e2] min-h-0 lg:px-8 ">
+        <div className="relative px-3 flex-1 lg:w-[24vw] lg:flex-none lg:flex-shrink-0 flex flex-col overflow-hidden  lg:border-t-0 lg:border-l border-[#e8e6e2] min-h-0 lg:px-8 ">
           <RightPanel
             activeStep={activeStep}
             selectedOptions={selectedOptions}
