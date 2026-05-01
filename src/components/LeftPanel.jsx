@@ -71,22 +71,19 @@ export default function LeftPanel({ onSave }) {
         </div>
 
         {/* Bottom controls */}
-        <div className="flex items-center justify-center gap-3 p-3 flex-shrink-0">
-          <button className="flex items-center gap-2 bg-white hover:bg-gray-100 text-[#333] text-[13px] h-9 px-4 rounded-lg transition-colors cursor-pointer shadow-sm border border-[#e8e6e2]">
-            View in AR
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="3" />
-              <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+        <div className="flex items-center justify-center gap-4 p-4 flex-shrink-0">
+          <button className="flex items-center gap-2.5 bg-[#d1d5dc]  hover:bg-[#e4e4e4] text-[#1a1a1a] text-[14px] font-medium h-12 px-6 rounded-xl transition-colors cursor-pointer">
+            View In AR
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
             </svg>
           </button>
-          <button className="flex items-center gap-2 bg-white hover:bg-gray-100 text-[#333] text-[13px] h-9 px-4 rounded-lg transition-colors cursor-pointer shadow-sm border border-[#e8e6e2]">
+          <button className="flex items-center gap-2.5 bg-[#d1d5dc] hover:bg-[#e4e4e4] text-[#1a1a1a] text-[14px] font-medium h-12 px-6 rounded-xl transition-colors cursor-pointer">
             Dimensions
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="3" y1="21" x2="21" y2="21" />
-              <line x1="3" y1="21" x2="3" y2="3" />
-              <polyline points="7 21 7 16 17 16 17 21" />
-              <line x1="12" y1="3" x2="12" y2="16" />
-              <polyline points="9 6 12 3 15 6" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 12h20M2 12l4-4M2 12l4 4M22 12l-4-4M22 12l-4 4"/>
             </svg>
           </button>
         </div>

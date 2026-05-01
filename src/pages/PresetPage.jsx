@@ -176,23 +176,26 @@ export default function PresetPage() {
 
   return (
     <div
-      className="min-h-screen w-full bg-[#f5f5f5] relative flex items-center justify-center px-6 py-16"
+      className="min-h-screen w-full bg-white relative flex justify-center px-6 py-16 overflow-hidden"
       style={{
         backgroundImage: `
-          linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px)
+          linear-gradient(rgba(12,18,28,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(12,18,28,0.04) 1px, transparent 1px)
         `,
         backgroundSize: '70px 70px',
       }}
     >
-      <h1
-        className="absolute top-[6%] left-1/2 -translate-x-1/2 w-full px-6 text-center font-bold text-[#0c121c]/[0.07] pointer-events-none select-none"
-        style={{ fontSize: 'clamp(32px, 7vw, 90px)', letterSpacing: '-0.03em' }}
-      >
+      {/* Decorative blobs */}
+      <div className="absolute top-[-80px] left-[-80px] w-80 h-80 rounded-full bg-[#0c121c]/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-32 left-10 w-56 h-56 rounded-full bg-[#0c121c]/4 blur-3xl pointer-events-none" />
+      <div className="absolute top-32 right-[-40px] w-64 h-64 rounded-full bg-[#0c121c]/4 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-[-40px] right-28 w-36 h-36 rounded-full bg-[#0c121c]/5 blur-2xl pointer-events-none" />
+
+      <h1 className="absolute top-10 sm:top-[12%] left-1/2 -translate-x-1/2 w-full px-6 text-center text-[clamp(34px,8vw,120px)] font-bold text-[#0c121c]/[0.09] tracking-tight leading-none pointer-events-none select-none capitalize">
         Configure Your Trailer
       </h1>
 
-      <div className="relative z-10 w-full max-w-[680px] bg-[#282d38] rounded-xl shadow-2xl px-10 py-6 border-3 border-white/20">
+      <div className="absolute top-[32%] z-10 w-full max-w-[680px] bg-[#282d38] rounded-xl shadow-2xl px-10 py-6 border-3 border-white/20 max-h-[50vh] overflow-y-auto scrollbar-hide scrollbar-thumb-[#0c121c]/100">
         <h2 className="text-white text-[46px] font-medium tracking-tight mb-5">
           Preset Selection
         </h2>

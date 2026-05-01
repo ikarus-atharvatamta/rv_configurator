@@ -1,13 +1,13 @@
 import { useState, useRef } from 'react';
 
 const SlidersIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-    <line x1="4" y1="6" x2="20" y2="6" />
-    <line x1="4" y1="12" x2="20" y2="12" />
-    <line x1="4" y1="18" x2="20" y2="18" />
-    <circle cx="8" cy="6" r="2" fill="white" />
-    <circle cx="16" cy="12" r="2" fill="white" />
-    <circle cx="10" cy="18" r="2" fill="white" />
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+    <line x1="6" y1="3" x2="6" y2="21" />
+    <line x1="12" y1="3" x2="12" y2="21" />
+    <line x1="18" y1="3" x2="18" y2="21" />
+    <circle cx="6" cy="14" r="2" fill="white" />
+    <circle cx="12" cy="8" r="2" fill="white" />
+    <circle cx="18" cy="16" r="2" fill="white" />
   </svg>
 );
 
@@ -358,6 +358,18 @@ const INT_TABS = [
   { id: 'climate', label: 'Climate Control' },
 ];
 
+const TAB_OPTIONS = {
+  color:      ['blackout'],
+  doors:      ['rear-ramp-door', 'rear-barn-door', 'side-door', 'service-window'],
+  functional: ['mag', 'torsion', 'ejack', 'recessed'],
+  roof:       [],
+  security:   [],
+  floor:      ['diamond', 'rubber'],
+  cargo:      ['etrack', 'cabinets'],
+  electrical: ['30amp', '50amp', 'radio'],
+  climate:    ['ac'],
+};
+
 export default function RightPanel({
   activeStep,
   selectedOptions,
@@ -368,6 +380,7 @@ export default function RightPanel({
 }) {
   const [activeSubTab, setActiveSubTab] = useState('color');
   const scrollRef = useRef(null);
+  const tabScrollRef = useRef(null);
 
   const tabs = activeStep === 'interior' ? INT_TABS : EXT_TABS;
 
@@ -384,38 +397,47 @@ export default function RightPanel({
   const isSelected = id => !!selectedOptions[id];
 
   return (
-    <div className="w-full flex-1 flex flex-col bg-white overflow-hidden min-h-0">
+    <div className="w-[full] flex-1 flex flex-col bg-white overflow-hidden min-h-0">
       <div className="hidden lg:flex items-center justify-between px-5 pt-5 pb-3 flex-shrink-0">
         <h2 className="text-[#0c121c] text-[24px] font-bold leading-tight">
           Enclosed Trailer<br />Configurator
         </h2>
-        <button className="text-[#888] hover:text-[#0c121c] transition-colors cursor-pointer p-1">
+        <button className="w-10 h-10 rounded-md bg-[#efefef] hover:bg-[#e4e4e4] flex items-center justify-center text-[#1a1a1a] transition-colors cursor-pointer flex-shrink-0">
           <SlidersIcon />
         </button>
       </div>
 
-      <div className="hidden lg:flex items-center flex-shrink-0 overflow-hidden">
-        <div ref={scrollRef} className="flex-1 flex items-center overflow-x-auto scrollbar-hide">
-          {tabs.map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => handleSubTab(tab.id)}
-              className={`flex-shrink-0 text-[12px] px-4 h-9 border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
-                activeSubTab === tab.id
-                  ? 'border-[#0c121c] text-[#0c121c] font-medium'
-                  : 'border-transparent text-[#999] hover:text-[#555]'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+      <div className="hidden lg:flex items-center flex-shrink-0 overflow-hidden lg:px-6">
+        <div ref={tabScrollRef} className="flex-1 flex items-center overflow-x-auto scrollbar-hide mb-2">
+          {tabs.map(tab => {
+            const isActive = activeSubTab === tab.id;
+            const hasSelection = TAB_OPTIONS[tab.id]?.some(id => selectedOptions[id] !== undefined);
+            return (
+              <button
+                key={tab.id}
+                onClick={() => handleSubTab(tab.id)}
+                className={`mt-4 flex-shrink-0 text-[16px] px-4 h-9 border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
+                  isActive
+                    ? hasSelection
+                      ? 'border-[#28453a] text-[#28453a] font-medium'
+                      : 'border-[#0c121c] text-[#0c121c] font-medium'
+                    : 'border-transparent text-[#999] hover:text-[#555]'
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
-        <button className="flex-shrink-0 px-3 h-9 text-[#999] hover:text-[#555] transition-colors cursor-pointer">
+        <button
+          onClick={() => tabScrollRef.current?.scrollBy({ left: 120, behavior: 'smooth' })}
+          className="flex-shrink-0 px-3 h-9 text-[#999] hover:text-[#555] transition-colors cursor-pointer"
+        >
           <ChevronRight />
         </button>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 lg:px-6 py-5 flex flex-col gap-10 scrollbar-thin">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto px-2 lg:px-6 py-5 flex flex-col gap-10 scrollbar-hide">
         {activeStep !== 'interior' && (
           <>
             <div id="section-color">

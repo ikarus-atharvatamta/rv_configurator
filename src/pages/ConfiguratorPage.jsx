@@ -4,6 +4,7 @@ import CategoryBar from '../components/CategoryBar';
 import LeftPanel from '../components/LeftPanel';
 import RightPanel from '../components/RightPanel';
 import BottomBar from '../components/BottomBar';
+import OrderSummary from '../components/OrderSummary';
 import { PREBUILDS } from '../data';
 
 const DEFAULT_BASE = 28500;
@@ -22,6 +23,7 @@ export default function ConfiguratorPage() {
   const [selectedColor, setSelectedColor] = useState('White');
   const [basePrice, setBasePrice] = useState(DEFAULT_BASE);
   const [modelName, setModelName] = useState('Model name');
+  const [openSummary, setOpenSummary] = useState(false);
 
   function handlePrebuildSelect(id) {
     if (id === null) {
@@ -77,7 +79,7 @@ export default function ConfiguratorPage() {
       {/* Panels wrapper — grows to fill space between Nav and BottomBar */}
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
         {/* Left: Trailer + CategoryBar */}
-        <div className="w-full lg:w-[70vw] lg:flex-shrink-0 min-h-0 flex flex-col overflow-hidden">
+        <div className="w-full lg:w-[75vw] lg:flex-shrink-0 min-h-0 flex flex-col lg:mx-4 overflow-hidden">
           <div className="hidden lg:block">
             <CategoryBar
               activeStep={activeStep}
@@ -85,7 +87,7 @@ export default function ConfiguratorPage() {
               stepProgress={activeStepProgress}
             />
           </div>
-          <div className="lg:flex-1 lg:min-h-0 lg:overflow-hidden mx-4 flex flex-col">
+          <div className="lg:flex-1 lg:min-h-0 lg:overflow-hidden lg:mx-4 flex flex-col">
             <LeftPanel onSave={handleSaveBuild} />
           </div>
           <div className="lg:hidden">
@@ -98,7 +100,7 @@ export default function ConfiguratorPage() {
         </div>
 
         {/* Right: Options panel */}
-        <div className="flex-1 lg:w-[29vw] lg:flex-none lg:flex-shrink-0 flex flex-col overflow-hidden border-t lg:border-t-0 lg:border-l border-[#e8e6e2] min-h-0">
+        <div className="relative flex-1 lg:w-[24vw] lg:flex-none lg:flex-shrink-0 flex flex-col overflow-hidden border-t lg:border-t-0 lg:border-l border-[#e8e6e2] min-h-0 px-8 ">
           <RightPanel
             activeStep={activeStep}
             selectedOptions={selectedOptions}
@@ -108,6 +110,17 @@ export default function ConfiguratorPage() {
             selectedPrebuild={selectedPrebuild}
             onPrebuildSelect={handlePrebuildSelect}
             onSubStepChange={setActiveSubStep}
+            savingsPct={20}
+          />
+          <OrderSummary
+            isOpen={openSummary}
+            onClose={() => setOpenSummary(false)}
+            modelName={modelName}
+            basePrice={basePrice}
+            addOns={addOns}
+            savingsPct={20}
+            selectedOptions={selectedOptions}
+            activeStep={activeStep}
           />
         </div>
       </div>
@@ -118,6 +131,9 @@ export default function ConfiguratorPage() {
         basePrice={basePrice}
         addOns={addOns}
         onDownload={handleDownload}
+        savingsPct={20}
+        selectedOptions={selectedOptions}
+        onOpenSummary={() => setOpenSummary(true)}
       />
     </div>
   );
