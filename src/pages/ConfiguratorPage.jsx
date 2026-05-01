@@ -100,7 +100,7 @@ export default function ConfiguratorPage() {
         </div>
 
         {/* Right: Options panel */}
-        <div className="relative flex-1 lg:w-[24vw] lg:flex-none lg:flex-shrink-0 flex flex-col overflow-hidden border-t lg:border-t-0 lg:border-l border-[#e8e6e2] min-h-0 px-8 ">
+        <div className="relative px-3 flex-1 lg:w-[24vw] lg:flex-none lg:flex-shrink-0 flex flex-col overflow-hidden border-t lg:border-t-0 lg:border-l border-[#e8e6e2] min-h-0 lg:px-8 ">
           <RightPanel
             activeStep={activeStep}
             selectedOptions={selectedOptions}

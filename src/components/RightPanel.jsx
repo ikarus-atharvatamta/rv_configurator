@@ -451,7 +451,7 @@ export default function RightPanel({
         </button>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-2 lg:px-6 py-5 flex flex-col gap-10 scrollbar-hide">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto lg:px-6 py-5 flex flex-col gap-10 scrollbar-hide">
         {activeStep !== 'interior' && (
           <>
             <div id="section-color">
